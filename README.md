@@ -1,28 +1,34 @@
 # Pharmacy Vietnam Sales Analytics
 
-Dự án phân tích dữ liệu bán hàng ngành dược tại Việt Nam, được xây dựng theo quy trình từ xử lý dữ liệu bằng SQL trên BigQuery đến trực quan hóa và phân tích trên Power BI.
+End-to-end sales analytics project using BigQuery SQL and Power BI to transform transactional pharmacy data into decision-oriented business insights.
 
-Mục tiêu của dự án là theo dõi hiệu suất kinh doanh theo thời gian, sản phẩm, khách hàng và kênh bán hàng, từ đó hỗ trợ đánh giá biến động doanh thu và hiệu quả hoạt động.
+## Project Overview
 
-## Công nghệ sử dụng
+This project analyzes pharmacy sales performance across multiple years and business dimensions, including products, customers and sales channels.
+
+The workflow covers data consolidation, data modeling, KPI calculation, Power BI visualization and business interpretation.
+
+## Tools & Technologies
 
 - SQL
-- BigQuery
+- Google BigQuery
 - Power BI
 - DAX
 - Power Query
 
-## Quy trình thực hiện
+## Data Workflow
 
-Raw Data  
+Quarterly Source Tables  
 ↓  
-SQL Cleaning & Transformation  
+Data Consolidation  
 ↓  
-Aggregated Tables  
+Dimension & Fact Tables  
 ↓  
-Power BI Data Model  
+Aggregated Analytical Tables  
 ↓  
-Dashboard & Business Analysis
+Power BI Dashboard  
+↓  
+Business Insights
 
 ## Data Model
 
@@ -34,31 +40,103 @@ Dashboard & Business Analysis
 
 ![Executive Overview](images/executive_overview.png)
 
-Trang tổng quan theo dõi các chỉ số chính như doanh thu, sản lượng, tăng trưởng theo năm, doanh thu lũy kế và số lượng khách hàng hoạt động.
+Tracks key indicators including revenue, quantity, YoY growth, YTD revenue, active customers, monthly trends and channel performance.
 
 ### 2. Product Performance
 
 ![Product Performance](images/product_performance.png)
 
-Phân tích hiệu suất sản phẩm dựa trên doanh thu, sản lượng, doanh thu kỳ trước, mức thay đổi theo năm và xếp hạng sản phẩm.
+Analyzes product-level revenue, quantity, prior-year performance, YoY change and product ranking.
 
 ### 3. Customer Performance
 
 ![Customer Performance](images/customer_performance.png)
 
-Phân tích hiệu suất khách hàng dựa trên doanh thu, sản lượng, mức đóng góp, tăng trưởng theo tháng và doanh thu của các kỳ trước.
+Analyzes customer contribution, historical revenue, MoM growth and channel distribution.
 
-## Cấu trúc dự án
+## Key Business Insights
+
+### Revenue growth slowed in H1 2026
+
+Revenue increased by approximately **4.8% in 2025 compared with 2024**, while sales quantity increased by only **1.1%**.
+
+This suggests that 2025 growth was more likely supported by pricing effects or a shift toward higher-value products than by volume expansion.
+
+In H1 2026, revenue grew by only **1.2% YoY**, despite quantity increasing by approximately **5.2%**.
+
+### Revenue per reported unit declined
+
+Estimated revenue per reported unit decreased by approximately **3.8% YoY in H1 2026**.
+
+This may indicate stronger discounting, a shift toward lower-priced products or changes in product mix.
+
+### Channel performance became increasingly uneven
+
+Compared with H1 2025:
+
+- Trade: **+68.7%**
+- Animal Health: **+25.9%**
+- Hospital: **-13.5%**
+- Retail: **-2.4%**
+
+Growth is increasingly concentrated in Trade and Animal Health, while Hospital performance is weakening.
+
+### Revenue shows recurring monthly patterns
+
+Revenue in 2025 fluctuated between approximately **VND 3.4T and VND 4.9T per month**, with stronger performance around March, June, August and December.
+
+These peaks may reflect purchasing cycles, tender schedules, promotional activity or inventory replenishment. The pattern should be validated before being treated as confirmed seasonality.
+
+### Product and customer revenue are concentrated
+
+A relatively small group of products and customers contributes a large share of total revenue.
+
+This creates concentration risk and highlights the importance of monitoring major accounts and core products.
+
+## Recommendations
+
+- Investigate the decline in revenue per reported unit.
+- Protect high-growth Trade and Animal Health accounts.
+- Develop a recovery plan for the Hospital channel.
+- Monitor customer and product concentration.
+- Separate returns and credit notes from standard sales.
+- Compare 2026 using H1-versus-H1 figures instead of full-year comparisons.
+- Improve master-data mapping before using Channel and ATC results for management decisions.
+
+## Data Quality & Limitations
+
+Several data-quality issues were identified:
+
+- **29,094 records** contain missing quantity or revenue information.
+- Negative revenue values may represent returns, credit notes or data errors.
+- Customer names contain inconsistent spacing and encoding.
+- Placeholder customer values such as `ZZZCCC` are present.
+- 2026 contains partial-year data, including an incomplete July period.
+
+These limitations may affect customer counts, channel attribution, product totals and YoY comparisons.
+
+## Project Structure
 
 ```text
 pharmacy-vietnam-sales-analytics/
 │
 ├── README.md
 ├── sql/
-├── powerbi/
-│   └── README.md
+│   ├── 01_build_base_table.sql
+│   ├── 02_dim_date.sql
+│   ├── 03_dim_product.sql
+│   ├── 04_dim_customer.sql
+│   ├── 05_fact_sales_monthly.sql
+│   ├── 06_agg_product_monthly.sql
+│   └── 07_agg_customer_monthly.sql
+│
 ├── images/
 │   ├── executive_overview.png
 │   ├── product_performance.png
 │   └── customer_performance.png
-└── docs/
+│
+├── docs/
+│   └── data_model.png
+│
+└── powerbi/
+    └── README.md
