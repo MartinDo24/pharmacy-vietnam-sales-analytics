@@ -24,6 +24,10 @@ Power BI Data Model
 ↓  
 Dashboard & Business Analysis
 
+## Data Model
+
+![Data Model](docs/data_model.png)
+
 ## Dashboard
 
 ### 1. Executive Overview
