@@ -1,9 +1,5 @@
-# Power BI Dashboard
+# Power BI File
 
-The Power BI file is not stored directly in this repository due to file size limitations.
+The Power BI `.pbix` file is hosted externally due to GitHub file size limitations.
 
-Dashboard screenshots and project documentation are available in the repository.
-
-## Power BI File
-
-The `.pbix` file is available here: [Download Power BI Dashboard]((https://drive.google.com/drive/folders/1zAyPIkoZK2obXckGVZdUn6ZxilS42my2?usp=drive_link))
+[Download the Power BI file](https://drive.google.com/drive/folders/1zAyPIkoZK2obXckGVZdUn6ZxilS42my2?usp=drive_link)
