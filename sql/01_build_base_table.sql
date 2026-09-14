@@ -1,10 +1,10 @@
--- ============================================================
+-- ===========================================================
 -- Pharmacy Vietnam Sales Analytics
 -- File: 01_build_base_table.sql
 -- Purpose:
 -- Combine quarterly pharmacy sales tables into one standardized
 -- base table for downstream modeling and Power BI reporting.
--- ============================================================
+-- ===========================================================
 
 CREATE OR REPLACE TABLE
   `portfolio_project.pharmacy_vn.all_sales` AS
